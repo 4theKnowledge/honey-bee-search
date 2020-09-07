@@ -1,0 +1,146 @@
+.App {
+  position: relative;
+  /* text-align: center; */
+  width: 100%;
+}
+
+.Search {
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+
+/* Search bar */
+.wrapper{
+	position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0,0.2);
+    max-width: 550px;
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 5px;
+    margin-top: 100px;
+}
+
+.wrapper .input {
+    width: 85%;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.searchbtn {
+  position: relative;
+    background: #ffaa00;
+    width: 10%;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.searchbtn .fas{
+	position: relative;
+    top: 50%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+}
+
+
+/* Sequence Matches */
+.seq-matches {
+  position: relative;
+  /* position: absolute; */
+  /* margin: 50px 0px; */
+  /* max-width: 550px; */
+  /* margin-bottom: 100px; */
+  
+}
+
+.seq-matches .seq-display {
+  position: relative;
+  color: black;
+  /* display: flex; */
+  justify-content: space-between;
+  text-align: left;
+  background: rgba(0, 0, 0,0.2);
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 550px;
+  overflow: hidden;
+  margin: 0 auto;
+  margin-top: 5px;
+  margin-bottom: 5px
+}
+
+/* Styling for Search Results Table */
+#search-results {
+  position: relative;
+  text-align: center;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  border: 0px solid #ddd;
+  width: 60%;
+  overflow: hidden;
+  margin: 0 auto;
+  border-radius: 5px;
+  max-width: 1100px;
+  margin-bottom: 20px;
+}
+
+#search-results td, #search-results th {
+  border: 0px solid #ddd;
+  padding: 8px;
+}
+
+#search-results tr:nth-child(even){background-color: #d1d1d1;}
+
+#search-results tr:hover {background-color: rgba(255, 170, 0, 0.5);}
+
+#search0results th:hover {background-color: rgba(0, 0, 0,0.5);}
+
+#search-results th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color:  rgba(0, 0, 0,0.5);
+  color: #ffaa00;
+}
+
+#table-link-seq-name{
+  color: black;
+}
+
+
+
+.footer-citation {
+  text-align: center;
+}
+
+#pagination {
+  /* margin: 0 auto; */
+  display: inline-block;
+  position: relative;
+}
+
+#pagination .page-link {
+  color: #ffaa00;
+}
+
+/* Download Button */
+.btn download{
+  background-color: rgba(0, 0, 0,0.5);  
+}
+
+
+
+
+#download-link {
+  color: #ffaa00;
+  font-weight: bold;
+}
