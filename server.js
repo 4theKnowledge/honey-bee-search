@@ -120,16 +120,11 @@ app.post('/api/searchresults', (req, res) => {
         .catch((error) => {
             console.log(error)
         });
-
         return promise;
     };
-
-    // req.body.seqs will be in format ABC,XYZ,ZZZ
     
     const pattern = RegExp('^[A-Z\,]*$');
     // Check if string formatted correctly
-
-
     if (!pattern.test(req.body.seqs)) {
         res.json('Incorrectly formatted input - please try again')
     }
@@ -137,18 +132,8 @@ app.post('/api/searchresults', (req, res) => {
     // Split on delimiter and build search results array
     const sequenceList = req.body.seqs.split(",");
 
-    // console.log(seqMatch(sequenceList[0]))
-
-
     // Compile search results
-
-    // let promises = [___, ___, ___]
-
-
     let promises = sequenceList.map(sequence => seqMatch(sequence));
-
-    // console.log(promises);
-
     Promise.all(promises)
     .then((resultSet) => {
         const data = resultSet.map((results, index) => {
@@ -161,76 +146,10 @@ app.post('/api/searchresults', (req, res) => {
             return {"sequence": sequence, 'matches': matches, 'names': matchedSequenceNames}
         })
         res.json(data);
-    
     })
     .catch((error) => {
         return(error)
     })
-
-
-    // function getSequenceData() {
-        // return Promise.all(promises).then((results) => {return results});
-    // }
-
-    // results = getSequenceData()
-
-
-    // ....
-
-
-    // let dict = [];
-    // Promise.all(promises)
-    //     .then((results) => {
-    //         res.json(results)
-    //         // for (let i=0; i < results.length; i++) {
-    //         //     console.log(results[i])
-    //         //     dict.push(results[i])
-    //         // }
-    //         // res.json(dict)
-    //     })
-    //     .catch((error) => {
-    //         console.log(error)
-    //     });
-
-
-    // let dict = [];
-    // let promises = sequenceList.map((sequence) => {
-    //     return GeneSeq.find({"sequence": {$regex: ".*"+sequence+".*"}}, {'_id': 0}).then((results) => {
-    //         dict.push({sequence: sequence, matches: [results]})
-    //         return dict
-    //     })
-    // })
-
-    
-    // Promise.all(promises).then((results) => {
-    //     console.log(results);
-    // })
-
-
-
-    // sequenceList.map((sequence) => {
-    //     if(sequence.length === 0) {
-    //         //pass if string incorrect...
-    //     } else {
-    //         sequence = sequence.trim()
-    //         var geneData = GeneSeq.find({"sequence": {$regex: ".*"+sequence+".*"}}, {'_id': 0})
-    //         .then((data) => {
-    //             // console.log(sequence);
-    //             // console.log(data);
-    //             return data
-    //         })
-    //         .catch((error) => {
-    //             console.log('Error', error);
-    //         })
-
-    //         console.log(geneData);
-            
-    //         dict.push({sequence: sequence, matches: [geneData]})
-            
-    //     }
-
-    //     res.json(dict);
-    // });
 })
 
 

@@ -27,7 +27,7 @@ class Search extends Component {
       const data = response.data;
       this.setState({ seq_set: data });
       console.log('Data has been received!');
-      console.log(this.state.seq_set)
+      // console.log(this.state.seq_set)
     })
     .catch(() => {
       console.log('Error retrieving data!');
@@ -46,18 +46,19 @@ class Search extends Component {
     event.preventDefault(); // stop browser from refreshing
 
     const payload = {
-        seq: this.state.search  // e.g. search bar text
+        seqs: this.state.search  // e.g. search bar text
     };
 
     trackPromise(
       Axios({
-        url: '/api/getseq',
+        url: '/api/searchresults',
         method: 'post', // axios GET by default
         data: payload
       })
         .then((response) => {
-          console.log('Data has been sent to the server');
+          console.log('Search string has been sent to the server!');
           const data = response.data;
+          // console.log('length', data.length);
           this.resetUserInputs();
           this.setState({ seq_set: data });
         })
@@ -80,7 +81,7 @@ class Search extends Component {
     }
 
     // const header = Object.keys(seqs[0]);
-    const header = ["Peptide", "Description", "Sequence"];
+    const header = ["Peptide", "Matches", "Match Names"];
     return header.map((key, index) => {
       return <th key={ index }>{ key } </th>
     });
@@ -90,6 +91,16 @@ class Search extends Component {
   truncate = (seq) => {
     return seq.length > 20 ? seq.substring(0, 15) + "..." : seq;
   }
+
+  // Create matched graphic
+  createMatchedGraph = (seqArray) => {
+      // Takes in array of sequences (name, description);
+      const names = seqArray.map((data) => {
+      return <div class="matched-name" title={ "Name: " + data.name + "\nDescription: " + data.description}></div>
+      })
+      return <div class="matched-names">{ names }</div>;
+  }
+
 
   displaySeq = (seqs, indexOfFirstPost, indexOfLastPost) => {
     if (!seqs.length) {
@@ -102,9 +113,9 @@ class Search extends Component {
 
     return currentSeqs.map((seq, index) => (
       <tr key={index}>
-        <td> <a href="!#" id="table-link-seq-name" target="_blank" rel="noopener noreferrer">{ seq.name }</a></td>
-        <td> { seq.description }</td>
-        <td> { this.truncate(seq.sequence) }</td>
+        <td> <a href="!#" id="table-link-seq-name" target="_blank" rel="noopener noreferrer">{ seq.sequence }</a></td>
+        <td id="match-text">  { seq.matches }</td>
+        <td> { this.createMatchedGraph(seq.names) }</td>
       </tr>
     ));
   };
@@ -135,22 +146,20 @@ class Search extends Component {
 
     // Output for download data
 
-    console.log(Object.keys(this.state.seq_set))
-
     var downloadArray = [];
 
     this.state.seq_set.map((seq) => (
       downloadArray.push([seq.name, seq.description, seq.sequence])
     ));
 
-    console.log(downloadArray);
+    // console.log(downloadArray);
     
     let downloadLink;
     if (0 < this.state.seq_set.length) {
-      console.log('set GT 0')
+      // console.log('set GT 0')
       downloadLink = <CSVLink data= {downloadArray} filename={"hb_proteome_search_results.csv"} className="btn download-link" target="_blank" id="download-link">Download</CSVLink>
     } else {
-      console.log('set LT 0')
+      // console.log('set LT 0')
       downloadLink = <p></p>
     }
 
