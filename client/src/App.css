@@ -144,3 +144,10 @@
   color: #ffaa00;
   font-weight: bold;
 }
+
+
+/* Search help text */
+#searchHelpBlock {
+  font-size: x-small;
+  display: block;
+}

@@ -145,14 +145,6 @@ class Search extends Component {
 
     console.log(downloadArray);
     
-    
-    // const csvContent = "data:text/csv;charset=utf-8," + downloadArray.map(e => e.join(",")).join("\n");
-    // var encodedUri = encodeURI(csvContent);
-    
-    // var link = document.createElement("a");
-    // link.setAttribute("href", encodedUri);
-    // link.setAttribute("download", "honey_bee_proteome_search_results.csv");
-    // document.body.appendChild(link);
     let downloadLink;
     if (0 < this.state.seq_set.length) {
       console.log('set GT 0')
@@ -170,16 +162,18 @@ class Search extends Component {
               <input
                 type="text"
                 className="input"
-                placeholder="Enter proteome sequence..."
+                placeholder="Enter peptide sequences..."
                 // value={this.state.search}
                 onChange= { this.handleChange }
                 >
               </input>
+
               <div className="searchbtn">
                 {/* update with on enter key to submit? */}
               <i className="fas fa-search" onClick={this.submit}></i> 
+              </div>
             </div>
-            </div>
+            <small id="searchHelpBlock" class="form-text text-muted">Format: XYZ | ABC | ZZZ</small>
             <p> { 0 < this.state.seq_set.length ? this.state.seq_set.length + " results returned" : "" }</p>
             <LoadingIndicator />
             <div className="seq-matches">
