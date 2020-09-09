@@ -98,7 +98,7 @@ class Search extends Component {
       // Takes in array of sequences (name, description);
       const names = seqArray.map((data) => {
       // return <div class="matched-name" title={ "Name: " + data.name + "\nDescription: " + data.description}></div>
-      return <ResultModal name={ data.name } sequence={ data.sequence} description={ data.description}/>
+      return <ResultModal name={ data.name } sequence={ data.sequence } description={ data.description}/>
     })
       return <div class="matched-names">{ names }</div>;
   }

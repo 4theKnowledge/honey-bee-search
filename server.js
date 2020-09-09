@@ -113,7 +113,7 @@ app.post('/api/singlesearchresult', (req, res) => {
 app.post('/api/searchresults', (req, res) => {
     
     function seqMatch(sequence) {
-        const promise = GeneSeq.find({"sequence": {$regex: ".*"+sequence+".*"}}, {'_id': 0, 'name': 1, 'description': 1})   // doesnt return _id
+        const promise = GeneSeq.find({"sequence": {$regex: ".*"+sequence+".*"}}, {'_id': 0, 'name': 1, 'sequence': 1, 'description': 1})   // doesnt return _id
         .then((data) => {
             return data;
         })
@@ -139,11 +139,11 @@ app.post('/api/searchresults', (req, res) => {
         const data = resultSet.map((results, index) => {
             const sequence = sequenceList[index];
             const matches = results.length;
-            const matchedSequenceNames = [];
+            const matchedResults = [];
             results.map((result) => {
-                matchedSequenceNames.push(result);
+                matchedResults.push(result);
             })
-            return {"sequence": sequence, 'matches': matches, 'names': matchedSequenceNames}
+            return {"sequence": sequence, 'matches': matches, 'names': matchedResults}
         })
         res.json(data);
     })

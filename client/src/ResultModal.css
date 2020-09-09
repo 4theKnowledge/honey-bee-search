@@ -21,25 +21,30 @@
 }
 
 .modal-title {
-    color: '#ffaa00' !important
+    color: '#ffaa00'
 }
 
 .sequenceContainer {
   border: 2px solid gray;
   border-radius: 5px;
-  min-height: 10%;
+  min-height: 20%;
+  max-height: 30%;
   width: 100%;
   max-width: 500px;
-  margin: 10px 10px;
-  overflow: scroll;
+  margin: 10px auto;
   border: 1px solid gray;
-  word-wrap: break-word;
-  overflow-x: hidden;
-  padding: 10px;
+  /* overflow-wrap: break-word; */
+  /* overflow-x: hidden; */
+  padding: 5px;
   background-color: lightgray
 }
 
 .modal-container {
   margin: 5px auto;
   display: inline-block;
+}
+
+.subtitle {
+  /* padding: 10px; */
+  margin: 10px auto;
 }

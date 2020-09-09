@@ -13,8 +13,9 @@ const customStyles = {
       bottom                : 'auto',
       marginRight           : '-50%',
       transform             : 'translate(-50%, -50%)',
-      minWidth: '50%',
-      minHeight: '25%'
+      width: '50%',
+      maxHeight: '50%',
+      maxWidth: '550px'
     }
   };
 
@@ -43,15 +44,14 @@ function ResultModal ({name, sequence, description}) {
             >
             <h2 className="modal-title"> { name }</h2>
             <hr/>
-            <h5 className="sequenceTitle">Sequence</h5>
-            <div className="sequenceContainer">
-                { sequence }
-            </div>
-            <h5 className="descriptionTitle">Description</h5>
+            <h5 className="subtitle">Description</h5>
             <div className="descriptionContainer">
-                { description }  
+                { description }
             </div>
-
+            <h5 className="subtitle">Sequence</h5>
+            <textarea className="sequenceContainer">
+                { sequence }
+            </textarea>
             <button className="btn-modal-content" onClick={ closeModal }>close</button>
             </Modal>
         </div>
