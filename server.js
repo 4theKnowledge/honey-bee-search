@@ -112,6 +112,8 @@ app.post('/api/singlesearchresult', (req, res) => {
 
 app.post('/api/searchresults', (req, res) => {
     
+    // TODO: uppercase with .toUpperCase()
+
     function seqMatch(sequence) {
         const promise = GeneSeq.find({"sequence": {$regex: ".*"+sequence+".*"}}, {'_id': 0, 'name': 1, 'sequence': 1, 'description': 1})   // doesnt return _id
         .then((data) => {

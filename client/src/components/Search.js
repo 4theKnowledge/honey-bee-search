@@ -94,11 +94,11 @@ class Search extends Component {
   }
 
   // Create matched graphic
-  createMatchedGraph = (seqArray) => {
+  createMatchedGraph = (partialSequence, seqArray) => {
       // Takes in array of sequences (name, description);
+      console.log(partialSequence);
       const names = seqArray.map((data) => {
-      // return <div class="matched-name" title={ "Name: " + data.name + "\nDescription: " + data.description}></div>
-      return <ResultModal name={ data.name } sequence={ data.sequence } description={ data.description}/>
+      return <ResultModal partialSequence = { partialSequence } name={ data.name } sequence={ data.sequence } description={ data.description}/>
     })
       return <div class="matched-names">{ names }</div>;
   }
@@ -117,7 +117,7 @@ class Search extends Component {
       <tr key={index}>
         <td> <a href="!#" id="table-link-seq-name" target="_blank" rel="noopener noreferrer">{ seq.sequence }</a></td>
         <td>{ seq.matches }</td>
-        <td> { this.createMatchedGraph(seq.names) }</td>
+        <td> { this.createMatchedGraph(seq.sequence, seq.names) }</td>
       </tr>
     ));
   };
@@ -137,7 +137,6 @@ class Search extends Component {
   // Change page
   paginate = (pageNumber) => {
     this.setState({currentPage: pageNumber})
-
   } 
 
   render() {

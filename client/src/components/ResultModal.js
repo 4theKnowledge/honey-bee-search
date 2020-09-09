@@ -1,7 +1,31 @@
 import React, { useState } from 'react';
 import '../ResultModal.css';
 import Modal from 'react-modal';
+import HighlightText from './HighlightText';
 
+// Randomly generate colour based on hased string
+// https://stackoverflow.com/questions/3426404/create-a-hexadecimal-colour-based-on-a-string-with-javascript
+
+function hashCode(str) {
+    var hash = 0;
+    for (var i = 0; i < str.length; i++) {
+        hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return hash;
+}
+
+function intToRGB(i) {
+    var c = (i & 0x00FFFFFF)
+        .toString(16)
+        .toUpperCase()
+
+    // console.log(c)
+    return "#"+c
+    // return "00000".substring(0, 6 - c.length) + c;
+}
+
+
+// Modal inline styling
 const customStyles = {
     overlay: {
         backgroundColor: 'grey'
@@ -22,7 +46,7 @@ const customStyles = {
 // Bind modal to parent element
 Modal.setAppElement('#root');
 
-function ResultModal ({name, sequence, description}) {
+function ResultModal ({partialSequence, name, sequence, description}) {
     const [modalIsOpen, setModalIsOpen] = useState(false)
 
     function openModal() {
@@ -33,9 +57,12 @@ function ResultModal ({name, sequence, description}) {
         setModalIsOpen(false);
     }
 
+    // Div color
+    const bgColor = intToRGB(hashCode(name));
+
     return (
         <div className="modal-container"title={ "Name: " + name + "\nDescription: " + description}>
-            <button className="btn-modal-open" onClick={ openModal }></button>
+            <button className="btn-modal-open" id={{ name }}onClick={ openModal } style={{backgroundColor: bgColor}}></button>
             <Modal 
                 isOpen={ modalIsOpen }
                 onRequestClose={ closeModal }
@@ -49,6 +76,7 @@ function ResultModal ({name, sequence, description}) {
                 { description }
             </div>
             <h5 className="subtitle">Sequence</h5>
+            < HighlightText searchTerm= { partialSequence } text={ sequence } />
             <textarea className="sequenceContainer">
                 { sequence }
             </textarea>
