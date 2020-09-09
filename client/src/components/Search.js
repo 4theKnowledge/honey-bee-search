@@ -97,8 +97,9 @@ class Search extends Component {
   createMatchedGraph = (seqArray) => {
       // Takes in array of sequences (name, description);
       const names = seqArray.map((data) => {
-      return <div class="matched-name" title={ "Name: " + data.name + "\nDescription: " + data.description}></div>
-      })
+      // return <div class="matched-name" title={ "Name: " + data.name + "\nDescription: " + data.description}></div>
+      return <ResultModal name={ data.name } sequence={ data.sequence} description={ data.description}/>
+    })
       return <div class="matched-names">{ names }</div>;
   }
 
@@ -183,7 +184,7 @@ class Search extends Component {
               <i className="fas fa-search" onClick={this.submit}></i> 
               </div>
             </div>
-            <ResultModal />
+            {/* <ResultModal name={"Sequence Name"} sequence={"ABCDEFGHIJKLMNOP"} description={"something about seq..."}/> */}
             <small id="searchHelpBlock" class="form-text text-muted">Format: XYZ | ABC | ZZZ</small>
             <p> { 0 < this.state.seq_set.length ? this.state.seq_set.length + " results returned" : "" }</p>
             <LoadingIndicator />

@@ -21,7 +21,7 @@ const customStyles = {
 // Bind modal to parent element
 Modal.setAppElement('#root');
 
-function ResultModal () {
+function ResultModal ({name, sequence, description}) {
     const [modalIsOpen, setModalIsOpen] = useState(false)
 
     function openModal() {
@@ -33,19 +33,27 @@ function ResultModal () {
     }
 
     return (
-        <div className="someModal">
-            <button className="btn-modal-open" onClick={ openModal }>M</button>
+        <div className="modal-container"title={ "Name: " + name + "\nDescription: " + description}>
+            <button className="btn-modal-open" onClick={ openModal }></button>
             <Modal 
                 isOpen={ modalIsOpen }
                 onRequestClose={ closeModal }
-                style={ customStyles }
+                style = { customStyles }
                 contentLabel = "Example Modal"
             >
-            
-            <h2 className="modal-title">Protein Name</h2>
-            <div>I am a modal</div>
+            <h2 className="modal-title"> { name }</h2>
+            <hr/>
+            <h5 className="sequenceTitle">Sequence</h5>
+            <div className="sequenceContainer">
+                { sequence }
+            </div>
+            <h5 className="descriptionTitle">Description</h5>
+            <div className="descriptionContainer">
+                { description }  
+            </div>
+
             <button className="btn-modal-content" onClick={ closeModal }>close</button>
-        </Modal>
+            </Modal>
         </div>
     );
 
