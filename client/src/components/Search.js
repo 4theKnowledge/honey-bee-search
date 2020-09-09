@@ -6,6 +6,7 @@ import Footer from './Footer';
 import Pagination from './Pagination';
 import LoadingIndicator from './LoadingIndicator';
 import { CSVLink } from 'react-csv';
+import ResultModal from './ResultModal';
 
 
 class Search extends Component {
@@ -14,7 +15,7 @@ class Search extends Component {
     search: '',
     seq_set: [],
     currentPage: 1,
-    resultsPerPage: 10
+    resultsPerPage: 10,
   };
 
   componentDidMount = () => {
@@ -114,7 +115,7 @@ class Search extends Component {
     return currentSeqs.map((seq, index) => (
       <tr key={index}>
         <td> <a href="!#" id="table-link-seq-name" target="_blank" rel="noopener noreferrer">{ seq.sequence }</a></td>
-        <td id="match-text">  { seq.matches }</td>
+        <td>{ seq.matches }</td>
         <td> { this.createMatchedGraph(seq.names) }</td>
       </tr>
     ));
@@ -178,13 +179,15 @@ class Search extends Component {
               </input>
 
               <div className="searchbtn">
-                {/* update with on enter key to submit? */}
+                {/* update with on enter key to submit e.g. press enter? */}
               <i className="fas fa-search" onClick={this.submit}></i> 
               </div>
             </div>
+            <ResultModal />
             <small id="searchHelpBlock" class="form-text text-muted">Format: XYZ | ABC | ZZZ</small>
             <p> { 0 < this.state.seq_set.length ? this.state.seq_set.length + " results returned" : "" }</p>
             <LoadingIndicator />
+            
             <div className="seq-matches">
               { this.displayPagination(this.state.seq_set) }
               <table id="search-results">

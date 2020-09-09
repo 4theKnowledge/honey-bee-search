@@ -1,0 +1,25 @@
+.btn-modal-open {
+    border: 2px solid gray;
+    border-radius: 5px;
+    height: 1.5em;
+    width: 1.5em;
+    margin: 5px auto;
+    display: inline-block;
+    background-color: #ffaa00;
+  }
+
+  .btn-modal-content {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border: 2px solid gray;
+    border-radius: 5px;
+    padding: 0px 4px;
+    margin: 10px 10px;
+    display: inline-block;
+    background-color: #ffaa00;
+}
+
+.modal-title {
+    color: '#ffaa00' !important
+}
