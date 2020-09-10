@@ -92,17 +92,20 @@ class Search extends Component {
     });
   };
 
-  // Truncate Sequence... TODO: add hover over
-  truncate = (seq) => {
-    return seq.length > 20 ? seq.substring(0, 15) + "..." : seq;
-  }
-
   // Create matched graphic
   createMatchedGraph = (partialSequence, seqArray) => {
       // Takes in array of sequences (name, description);
       console.log(partialSequence);
       const names = seqArray.map((data) => {
-      return <ResultModal partialSequence = { partialSequence } name={ data.name } sequence={ data.sequence } description={ data.description} setHoverElement={ this.setHoverElement } resetHoverElement={this.resetHoverElement} hoveredElement={this.state.hoveredElement}/>
+      return <ResultModal
+                partialSequence={ partialSequence }
+                name={ data.name }
+                sequence={ data.sequence }
+                description={ data.description}
+                setHoverElement={ this.setHoverElement }
+                resetHoverElement={this.resetHoverElement}
+                hoveredElement={this.state.hoveredElement}
+              />
     })
       return <div class="matched-names">{ names }</div>;
   }
@@ -126,7 +129,6 @@ class Search extends Component {
     ));
   };
 
-
   // Pagination
   displayPagination = (seqs) => {
     if (!seqs.length) {
@@ -134,7 +136,11 @@ class Search extends Component {
     }
 
     return (
-      <Pagination resultsPerPage={ this.state.resultsPerPage } totalResults={ this.state.seq_set.length } paginate={ this.paginate }/>
+      <Pagination
+          resultsPerPage={ this.state.resultsPerPage }
+          totalResults={ this.state.seq_set.length }
+          paginate={ this.paginate }
+          currentPage={ this.state.currentPage }/>
     )
   }
 
@@ -145,13 +151,14 @@ class Search extends Component {
 
   // Button hover
   setHoverElement = (name) => {
-    console.log(name)
     this.setState({hoveredElement: name})
   }
-
   resetHoverElement = () => {
     this.setState({hoveredElement: null});
   }
+
+
+
 
   render() {
 
@@ -174,11 +181,16 @@ class Search extends Component {
               })
     ));
 
-    // console.log(downloadArray);
-    
     let downloadLink;
     if (0 < this.state.seq_set.length) {
-      downloadLink = <CSVLink data= {downloadArray} filename={"hb_proteome_search_results.csv"} className="btn download-link" target="_blank" id="download-link">Download</CSVLink>
+      downloadLink = <CSVLink
+                        data={downloadArray}
+                        filename={"hb_proteome_search_results.csv"}
+                        className="btn download-link"
+                        target="_blank"
+                        id="download-link">
+                          Download
+                     </CSVLink>
     } else {
       downloadLink = <p></p>
     }
@@ -198,13 +210,12 @@ class Search extends Component {
 
               <div className="searchbtn">
                 {/* update with on enter key to submit e.g. press enter? */}
-              <i className="fas fa-search" onClick={this.submit}></i> 
+              <i className="fas fa-search" onClick={ this.submit }></i> 
               </div>
             </div>
             <small id="searchHelpBlock" class="form-text text-muted">Format: XYZ,ABC,ZZZ</small>
             <p> { 0 < this.state.seq_set.length ? this.state.seq_set.length + " results returned" : "" }</p>
             <LoadingIndicator />
-            
             <div className="seq-matches">
               { this.displayPagination(this.state.seq_set) }
               <table id="search-results">

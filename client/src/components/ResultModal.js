@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import '../ResultModal.css';
 import Modal from 'react-modal';
 import HighlightText from './HighlightText';
@@ -19,8 +19,6 @@ String.prototype.toRGB = function() {
     }
     return `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
 }
-
-
 
 // Modal inline styling
 const customStyles = {
@@ -55,8 +53,6 @@ function ResultModal ({partialSequence, name, sequence, description, setHoverEle
     }
 
     const opaque = hoveredElement === name || hoveredElement == null;
-
-    console.log(opaque);
     
     return (
         <div className="modal-container" title={ "Name: " + name + "\nDescription: " + description}>
@@ -82,15 +78,11 @@ function ResultModal ({partialSequence, name, sequence, description, setHoverEle
                 { description }
             </div>
             <h5 className="subtitle">Sequence</h5>
-            < HighlightText searchTerm= { partialSequence } text={ sequence } />
-            {/* <textarea className="sequenceContainer"> */}
-                {/* { sequence } */}
-            {/* </textarea> */}
+            <HighlightText searchTerm= { partialSequence } text={ sequence } />
             <button className="btn-modal-content" onClick={ closeModal }>close</button>
             </Modal>
         </div>
     );
-
 }
 
 export default ResultModal
