@@ -89,14 +89,13 @@ app.get('/api', (req, res) => {
     // });
 
     res.json({
-        msg: "get request rec."
+        msg: "Got request rec."
     })
 
 });
 
 
 app.post('/api/singlesearchresult', (req, res) => {
-
     GeneSeq.find({"sequence": {$regex: ".*"+req.body.seq+".*"}}, {'_id': 0, 'name': 1, 'description': 1})   // doesnt return _id
         .exec()
         .then((data) => {
@@ -106,13 +105,13 @@ app.post('/api/singlesearchresult', (req, res) => {
         .catch((error) => {
             console.log(error)
         });
-
 })
 
 
 app.post('/api/searchresults', (req, res) => {
     
     // TODO: uppercase with .toUpperCase()
+    // TODO fix when whitespace in text... breaks things...
 
     function seqMatch(sequence) {
         const promise = GeneSeq.find({"sequence": {$regex: ".*"+sequence+".*"}}, {'_id': 0, 'name': 1, 'sequence': 1, 'description': 1})   // doesnt return _id

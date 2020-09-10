@@ -38,15 +38,20 @@ const Pagination = ({ resultsPerPage, totalResults, paginate, currentPage }) => 
                     </a>
                 </li>
                 { pageNumbers.map(number => (
-                    <li key={ number } className="page-item">
-                        <a onClick={() => paginate(number)} className="page-link">
-                            { number }
-                        </a>
-                    </li>
+                <li key={ number } className="page-item">
+                    <a onClick={() => paginate(number)} className={(number == currentPage) ? "page-link active" : "page-link"}>
+                        { number }
+                    </a>
+                </li>
                 ))}
                 <li className="page-item">
                     <a onClick={() => paginate(currentPage + 1 > lastPage ? lastPage : currentPage + 1)} className="page-link">
                         Next
+                    </a>
+                </li>
+                <li className="page-item">
+                    <a onClick={() => paginate(lastPage)} className="page-link">
+                        Last
                     </a>
                 </li>
             </ul>
