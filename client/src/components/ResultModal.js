@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import '../ResultModal.css';
 import Modal from 'react-modal';
 import HighlightText from './HighlightText';
+import InteractiveImage from './InteractiveImage';
+
 
 // Randomly generate colour based on hased string
 // https://gist.github.com/0x263b/2bdd90886c2036a1ad5bcf06d6e6fb37
@@ -40,15 +42,8 @@ Modal.setAppElement('#root');
 
 function ResultModal ({partialSequence, name, sequence, description, setHoverElement, resetHoverElement, hoveredElement}) {
     const [modalIsOpen, setModalIsOpen] = useState(false)
-    
-    function openModal() {
-        setModalIsOpen(true);
-    }
-    
-    function closeModal() {
-        setModalIsOpen(false);
-    }
-
+    function openModal() {setModalIsOpen(true)}
+    function closeModal() {setModalIsOpen(false)}
     const opaque = hoveredElement === name || hoveredElement == null;
     
     return (
@@ -67,16 +62,25 @@ function ResultModal ({partialSequence, name, sequence, description, setHoverEle
                 onRequestClose={ closeModal }
                 style = { customStyles }
                 contentLabel = "Example Modal"
-            >
-            <h2 className="modal-title"> { name }</h2>
-            <hr/>
-            <h5 className="subtitle">Description</h5>
-            <div className="descriptionContainer">
-                { description }
-            </div>
-            <h5 className="subtitle">Sequence</h5>
-            <HighlightText searchTerm= { partialSequence } text={ sequence } />
-            <button className="btn-modal-content" onClick={ closeModal }>close</button>
+                >
+                <h2 className="modal-title"> { name }</h2>
+                <hr/>
+                <h5 className="subtitle">Description</h5>
+                <div className="descriptionContainer">
+                    { description }
+                </div>
+                <h5 className="subtitle">Sequence</h5>
+                <HighlightText searchTerm= { partialSequence } text={ sequence } />
+                <h5 className="subtitle">Pathway</h5>
+                <div>Something about pathways will come here...</div>
+                <h5 className="subtitle">Distribution</h5>
+                <div>Something goes here with drone, queen and worker svg</div>
+                <div className="beeImages">
+                    <InteractiveImage value={ 100 } caption = { 'Drone' }/>
+                    <InteractiveImage value={ 100 } caption = { 'Worker' }/>
+                    <InteractiveImage value={ 100 } caption = { 'Queen' }/>
+                </div>
+                <button className="btn-modal-content" onClick={ closeModal }>close</button>
             </Modal>
         </div>
     );

@@ -10,12 +10,11 @@ import ResultModal from './ResultModal';
 
 
 class Search extends Component {
-
   state = {
-    search: 'QVQHI,QVQH', // while dev
+    search: 'QVQHI,QVQHI,QVQHI',
     seq_set: [],
     currentPage: 1,
-    resultsPerPage: 1,
+    resultsPerPage: 10,
     hoveredElement: null,
   };
 
@@ -28,8 +27,6 @@ class Search extends Component {
     .then((response) => {
       const data = response.data;
       this.setState({ seq_set: data });
-      console.log('Data has been received!');
-      // console.log(this.state.seq_set)
     })
     .catch(() => {
       console.log('Error retrieving data!');
@@ -42,8 +39,6 @@ class Search extends Component {
     this.setState( { search: value});
   };
 
-
-  // this will be the event that is passed to mongodb to retrieve seqs
   submit = (event) => {
     event.preventDefault(); // stop browser from refreshing
 
