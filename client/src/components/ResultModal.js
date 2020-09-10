@@ -22,9 +22,6 @@ String.prototype.toRGB = function() {
 
 // Modal inline styling
 const customStyles = {
-    overlay: {
-        // backgroundColor: 'grey'
-    },
     content : {
       top                   : '50%',
       left                  : '50%',

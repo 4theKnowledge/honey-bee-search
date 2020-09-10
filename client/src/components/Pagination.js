@@ -3,11 +3,10 @@ import '../App.css';
 
 const Pagination = ({ resultsPerPage, totalResults, paginate, currentPage }) => {
     const fwdBckwdPages = 2;
-
-    var startPage = currentPage - fwdBckwdPages;
-    var endPage = currentPage + fwdBckwdPages;
-
     const lastPage = Math.ceil(totalResults/resultsPerPage);
+    var startPage = currentPage - fwdBckwdPages < 1 ? 1 : currentPage - fwdBckwdPages;
+    var endPage = currentPage + fwdBckwdPages;
+    const pageNumbers = [];
 
     if (startPage < fwdBckwdPages) {
         startPage = 1;
@@ -15,11 +14,8 @@ const Pagination = ({ resultsPerPage, totalResults, paginate, currentPage }) => 
     }
     if (lastPage <= endPage) {
         endPage = lastPage;
-        startPage = endPage - 2*fwdBckwdPages;
+        startPage = endPage - 2*fwdBckwdPages < 1 ? 1 : endPage - 2*fwdBckwdPages;
     }
-
-    const pageNumbers = [];
-
     for(let i = startPage; i <= endPage; i++) {
         pageNumbers.push(i);
     }
@@ -57,7 +53,6 @@ const Pagination = ({ resultsPerPage, totalResults, paginate, currentPage }) => 
             </ul>
         </nav>
     )
-
-  }
+}
 
 export default Pagination;

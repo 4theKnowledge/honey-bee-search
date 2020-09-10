@@ -15,7 +15,7 @@ class Search extends Component {
     search: 'QVQHI,QVQH', // while dev
     seq_set: [],
     currentPage: 1,
-    resultsPerPage: 10,
+    resultsPerPage: 1,
     hoveredElement: null,
   };
 
