@@ -16,6 +16,7 @@ class Search extends Component {
     seq_set: [],
     currentPage: 1,
     resultsPerPage: 10,
+    hoveredElement: null,
   };
 
   componentDidMount = () => {
@@ -101,7 +102,7 @@ class Search extends Component {
       // Takes in array of sequences (name, description);
       console.log(partialSequence);
       const names = seqArray.map((data) => {
-      return <ResultModal partialSequence = { partialSequence } name={ data.name } sequence={ data.sequence } description={ data.description}/>
+      return <ResultModal partialSequence = { partialSequence } name={ data.name } sequence={ data.sequence } description={ data.description} setHoverElement={ this.setHoverElement } resetHoverElement={this.resetHoverElement} hoveredElement={this.state.hoveredElement}/>
     })
       return <div class="matched-names">{ names }</div>;
   }
@@ -140,7 +141,17 @@ class Search extends Component {
   // Change page
   paginate = (pageNumber) => {
     this.setState({currentPage: pageNumber})
-  } 
+  }
+
+  // Button hover
+  setHoverElement = (name) => {
+    console.log(name)
+    this.setState({hoveredElement: name})
+  }
+
+  resetHoverElement = () => {
+    this.setState({hoveredElement: null});
+  }
 
   render() {
 
@@ -148,8 +159,7 @@ class Search extends Component {
     const indexOfLastPost = this.state.currentPage * this.state.resultsPerPage;
     const indexOfFirstPost = indexOfLastPost - this.state.resultsPerPage;
 
-
-    console.log(this.state.seq_set);
+    // console.log(this.state.seq_set);
 
     // Output for download data
     var downloadArray = [];

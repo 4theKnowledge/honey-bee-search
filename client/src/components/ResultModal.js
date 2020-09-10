@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../ResultModal.css';
 import Modal from 'react-modal';
 import HighlightText from './HighlightText';
@@ -43,48 +43,31 @@ const customStyles = {
 // Bind modal to parent element
 Modal.setAppElement('#root');
 
-function ResultModal ({partialSequence, name, sequence, description}) {
+function ResultModal ({partialSequence, name, sequence, description, setHoverElement, resetHoverElement, hoveredElement}) {
     const [modalIsOpen, setModalIsOpen] = useState(false)
-
+    
     function openModal() {
         setModalIsOpen(true);
     }
-
+    
     function closeModal() {
         setModalIsOpen(false);
     }
 
-    function setOpacity(e) {
-        const btnList = document.getElementById('search-results').querySelectorAll(".btn-modal-open");
-        
-        btnList.forEach((btn) => {
-            if (btn.getAttribute('attr') == e.target.getAttribute('attr')) {
-                //pass
-            } else {
-                btn.style.opacity=0.25;
-            }
-        })
-    }
+    const opaque = hoveredElement === name || hoveredElement == null;
 
-    function resetOpacity(e) {
-        const btnList = document.getElementById('search-results').querySelectorAll('.btn-modal-open');
-        btnList.forEach((btn) => {
-            btn.style.opacity=1.0;
-        })
-
-    }
-
+    console.log(opaque);
+    
     return (
-        <div className="modal-container"title={ "Name: " + name + "\nDescription: " + description}>
+        <div className="modal-container" title={ "Name: " + name + "\nDescription: " + description}>
             <button
                 className="btn-modal-open"
                 attr={ name }
                 onClick={ openModal }
-                style={{ backgroundColor: name.toRGB() }}
-                onMouseEnter={ setOpacity }
-                onMouseLeave={ resetOpacity }
+                style={{ backgroundColor: name.toRGB(), opacity: (opaque ? 1 : 0.1)}}
+                onMouseEnter={() => setHoverElement(name) }
+                onMouseLeave={() => resetHoverElement() }
                 >
-
             </button>
             <Modal 
                 isOpen={ modalIsOpen }
