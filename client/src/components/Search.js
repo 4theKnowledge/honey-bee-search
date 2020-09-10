@@ -12,7 +12,7 @@ import ResultModal from './ResultModal';
 class Search extends Component {
 
   state = {
-    search: '',
+    search: 'QVQHI,QVQH', // while dev
     seq_set: [],
     currentPage: 1,
     resultsPerPage: 10,
@@ -45,6 +45,9 @@ class Search extends Component {
   // this will be the event that is passed to mongodb to retrieve seqs
   submit = (event) => {
     event.preventDefault(); // stop browser from refreshing
+
+    // Get rid of current sequence set...
+    this.setState({ seq_set: []})
 
     const payload = {
         seqs: this.state.search  // e.g. search bar text
@@ -145,22 +148,28 @@ class Search extends Component {
     const indexOfLastPost = this.state.currentPage * this.state.resultsPerPage;
     const indexOfFirstPost = indexOfLastPost - this.state.resultsPerPage;
 
+
+    console.log(this.state.seq_set);
+
     // Output for download data
-
     var downloadArray = [];
-
-    this.state.seq_set.map((seq) => (
-      downloadArray.push([seq.name, seq.description, seq.sequence])
+    this.state.seq_set.map((sequenceMatch) => (
+      
+      // console.log(sequenceMatch)
+      sequenceMatch.names.map((match) => {
+        downloadArray.push([sequenceMatch.sequence,
+                            sequenceMatch.matches,
+                            match.name,
+                            match.description]);
+              })
     ));
 
     // console.log(downloadArray);
     
     let downloadLink;
     if (0 < this.state.seq_set.length) {
-      // console.log('set GT 0')
       downloadLink = <CSVLink data= {downloadArray} filename={"hb_proteome_search_results.csv"} className="btn download-link" target="_blank" id="download-link">Download</CSVLink>
     } else {
-      // console.log('set LT 0')
       downloadLink = <p></p>
     }
 
@@ -173,7 +182,6 @@ class Search extends Component {
                 type="text"
                 className="input"
                 placeholder="Enter peptide sequences..."
-                // value={this.state.search}
                 onChange= { this.handleChange }
                 >
               </input>
@@ -183,8 +191,7 @@ class Search extends Component {
               <i className="fas fa-search" onClick={this.submit}></i> 
               </div>
             </div>
-            {/* <ResultModal name={"Sequence Name"} sequence={"ABCDEFGHIJKLMNOP"} description={"something about seq..."}/> */}
-            <small id="searchHelpBlock" class="form-text text-muted">Format: XYZ | ABC | ZZZ</small>
+            <small id="searchHelpBlock" class="form-text text-muted">Format: XYZ,ABC,ZZZ</small>
             <p> { 0 < this.state.seq_set.length ? this.state.seq_set.length + " results returned" : "" }</p>
             <LoadingIndicator />
             

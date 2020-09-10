@@ -4,31 +4,28 @@ import Modal from 'react-modal';
 import HighlightText from './HighlightText';
 
 // Randomly generate colour based on hased string
-// https://stackoverflow.com/questions/3426404/create-a-hexadecimal-colour-based-on-a-string-with-javascript
-
-function hashCode(str) {
+// https://gist.github.com/0x263b/2bdd90886c2036a1ad5bcf06d6e6fb37
+String.prototype.toRGB = function() {
     var hash = 0;
-    for (var i = 0; i < str.length; i++) {
-        hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    if (this.length === 0) return hash;
+    for (var i = 0; i < this.length; i++) {
+        hash = this.charCodeAt(i) + ((hash << 5) - hash);
+        hash = hash & hash;
     }
-    return hash;
+    var rgb = [0, 0, 0];
+    for (var i = 0; i < 3; i++) {
+        var value = (hash >> (i * 8)) & 255;
+        rgb[i] = value;
+    }
+    return `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
 }
 
-function intToRGB(i) {
-    var c = (i & 0x00FFFFFF)
-        .toString(16)
-        .toUpperCase()
-
-    // console.log(c)
-    return "#"+c
-    // return "00000".substring(0, 6 - c.length) + c;
-}
 
 
 // Modal inline styling
 const customStyles = {
     overlay: {
-        backgroundColor: 'grey'
+        // backgroundColor: 'grey'
     },
     content : {
       top                   : '50%',
@@ -39,7 +36,7 @@ const customStyles = {
       transform             : 'translate(-50%, -50%)',
       width: '50%',
       maxHeight: '50%',
-      maxWidth: '550px'
+      maxWidth: '750px'
     }
   };
 
@@ -57,12 +54,38 @@ function ResultModal ({partialSequence, name, sequence, description}) {
         setModalIsOpen(false);
     }
 
-    // Div color
-    const bgColor = intToRGB(hashCode(name));
+    function setOpacity(e) {
+        const btnList = document.getElementById('search-results').querySelectorAll(".btn-modal-open");
+        
+        btnList.forEach((btn) => {
+            if (btn.getAttribute('attr') == e.target.getAttribute('attr')) {
+                //pass
+            } else {
+                btn.style.opacity=0.25;
+            }
+        })
+    }
+
+    function resetOpacity(e) {
+        const btnList = document.getElementById('search-results').querySelectorAll('.btn-modal-open');
+        btnList.forEach((btn) => {
+            btn.style.opacity=1.0;
+        })
+
+    }
 
     return (
         <div className="modal-container"title={ "Name: " + name + "\nDescription: " + description}>
-            <button className="btn-modal-open" id={{ name }}onClick={ openModal } style={{backgroundColor: bgColor}}></button>
+            <button
+                className="btn-modal-open"
+                attr={ name }
+                onClick={ openModal }
+                style={{ backgroundColor: name.toRGB() }}
+                onMouseEnter={ setOpacity }
+                onMouseLeave={ resetOpacity }
+                >
+
+            </button>
             <Modal 
                 isOpen={ modalIsOpen }
                 onRequestClose={ closeModal }
@@ -77,9 +100,9 @@ function ResultModal ({partialSequence, name, sequence, description}) {
             </div>
             <h5 className="subtitle">Sequence</h5>
             < HighlightText searchTerm= { partialSequence } text={ sequence } />
-            <textarea className="sequenceContainer">
-                { sequence }
-            </textarea>
+            {/* <textarea className="sequenceContainer"> */}
+                {/* { sequence } */}
+            {/* </textarea> */}
             <button className="btn-modal-content" onClick={ closeModal }>close</button>
             </Modal>
         </div>

@@ -102,13 +102,13 @@
 
 #search-results tr:hover {background-color: rgba(255, 170, 0, 0.5);}
 
-#search0results th:hover {background-color: rgba(0, 0, 0,0.5);}
+/* #search-results th:hover {background-color: rgba(0, 0, 0,0.9);} */
 
 #search-results th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
-  background-color:  rgba(0, 0, 0,0.5);
+  background-color:  black;
   color: #ffaa00;
 }
 

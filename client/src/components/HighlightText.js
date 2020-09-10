@@ -9,8 +9,6 @@ function HighlightText ({searchTerm, text}) {
   function createHighlight(text) {
     let split = text.toUpperCase().split(searchTerm.toUpperCase());
 
-    console.log(split);
-
     let ttt = "";
 
     for (let i = 0; i < split.length; i++) {
@@ -24,13 +22,12 @@ function HighlightText ({searchTerm, text}) {
     return ttt;
   }
     return (
-      <div className="sequenceSpan">
-        <p
+        <div
+          className="sequenceContainer"
           dangerouslySetInnerHTML={{
             __html: createHighlight(text)
           }}
         />
-      </div>
     );
 }
 
