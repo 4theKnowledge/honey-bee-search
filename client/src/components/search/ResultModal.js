@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import '../ResultModal.css';
+import '../../stylesheets/ResultModal.css';
 import Modal from 'react-modal';
 import HighlightText from './HighlightText';
 import InteractiveImage from './InteractiveImage';
-
 
 // Randomly generate colour based on hased string
 // https://gist.github.com/0x263b/2bdd90886c2036a1ad5bcf06d6e6fb37
@@ -15,9 +14,9 @@ String.prototype.toRGB = function() {
         hash = hash & hash;
     }
     var rgb = [0, 0, 0];
-    for (var i = 0; i < 3; i++) {
-        var value = (hash >> (i * 8)) & 255;
-        rgb[i] = value;
+    for (var j = 0; j < 3; j++) {
+        var value = (hash >> (j * 8)) & 255;
+        rgb[j] = value;
     }
     return `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
 }

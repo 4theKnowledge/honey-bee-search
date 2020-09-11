@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import './App.css';
+import './stylesheets/App.css';
 import Nav from './components/Nav';
 import Header from './components/Header';
 import Home from './components/Home';
-import Search from './components/Search';
+import Search from './components/search/Search';
 import Citation from './components/Citation';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 

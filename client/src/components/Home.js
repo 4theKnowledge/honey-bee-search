@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Home.css';
+import '../stylesheets/Home.css';
 import FooterLarge from './FooterLarge';
 
 

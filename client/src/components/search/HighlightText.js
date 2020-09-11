@@ -1,5 +1,5 @@
 import React from "react";
-import '../App.css';
+import '../../stylesheets/App.css';
 
 // https://codesandbox.io/s/flamboyant-frost-hn47k?fontsize=14&file=/src/styles.css
 // https://stackoverflow.com/questions/57368134/highlight-part-of-text

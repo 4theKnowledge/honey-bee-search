@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import '../App.css';
+import '../../stylesheets/App.css';
 import Axios from 'axios';
 import { trackPromise } from 'react-promise-tracker';
-import Footer from './Footer';
+import Footer from '../Footer';
 import Pagination from './Pagination';
 import LoadingIndicator from './LoadingIndicator';
 import { CSVLink } from 'react-csv';

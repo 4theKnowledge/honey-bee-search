@@ -1,5 +1,5 @@
 import React from 'react';
-import '../App.css';
+import '../../stylesheets/App.css';
 
 const Pagination = ({ resultsPerPage, totalResults, paginate, currentPage }) => {
     const fwdBckwdPages = 2;
@@ -35,7 +35,7 @@ const Pagination = ({ resultsPerPage, totalResults, paginate, currentPage }) => 
                 </li>
                 { pageNumbers.map(number => (
                 <li key={ number } className="page-item">
-                    <a onClick={() => paginate(number)} className={(number == currentPage) ? "page-link active" : "page-link"}>
+                    <a onClick={() => paginate(number)} className={(number === currentPage) ? "page-link active" : "page-link"}>
                         { number }
                     </a>
                 </li>

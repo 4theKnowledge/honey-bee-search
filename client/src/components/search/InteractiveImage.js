@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import '../ResultModal.css';
+import React from 'react';
+import '../../stylesheets/ResultModal.css';
 
 function InteractiveImage ({value, caption}) {
 
