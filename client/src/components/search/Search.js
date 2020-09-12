@@ -7,6 +7,7 @@ import Pagination from './Pagination';
 import LoadingIndicator from './LoadingIndicator';
 import { CSVLink } from 'react-csv';
 import ResultModal from './ResultModal';
+import BarChart from '../charts/BarChart';
 
 
 class Search extends Component {
@@ -16,6 +17,7 @@ class Search extends Component {
     currentPage: 1,
     resultsPerPage: 10,
     hoveredElement: null,
+    data: [10, 40, 30, 20, 50, 10],
   };
 
   componentDidMount = () => {
@@ -105,7 +107,6 @@ class Search extends Component {
       return <div class="matched-names">{ names }</div>;
   }
 
-
   displaySeq = (seqs, indexOfFirstPost, indexOfLastPost) => {
     if (!seqs.length) {
         console.log('no seq matched or searched!');
@@ -194,13 +195,13 @@ class Search extends Component {
     return (
       <React.Fragment>
         <div className="Search">
+              <BarChart width={400} height={200} data={this.state.data} />
             <div className="wrapper">
               <input
                 type="text"
                 className="input"
                 placeholder="Enter peptide sequences..."
-                onChange= { this.handleChange }
-                >
+                onChange= { this.handleChange }>
               </input>
 
               <div className="searchbtn">
