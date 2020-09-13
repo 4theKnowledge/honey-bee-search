@@ -72,12 +72,12 @@ function ResultModal ({partialSequence, name, sequence, description, setHoverEle
                 <HighlightText searchTerm= { partialSequence } text={ sequence } />
                 <h5 className="subtitle">Pathway</h5>
                 <div>Something about pathways will come here...</div>
-                <h5 className="subtitle">Distribution</h5>
+                <h5 className="subtitle">Caste</h5>
                 <div>Something goes here with drone, queen and worker svg</div>
                 <div className="beeImages">
-                    <InteractiveImage value={ 100 } caption = { 'Drone' }/>
-                    <InteractiveImage value={ 100 } caption = { 'Worker' }/>
-                    <InteractiveImage value={ 100 } caption = { 'Queen' }/>
+                    <InteractiveImage value={ 100 } caption = { 'Drone' } opacity={ 0.7 }/>
+                    <InteractiveImage value={ 100 } caption = { 'Worker' } opacity={ 0.8 }/>
+                    <InteractiveImage value={ 100 } caption = { 'Queen' } opacity={ 1.0 }/>
                 </div>
                 <button className="btn-modal-content" onClick={ closeModal }>close</button>
             </Modal>

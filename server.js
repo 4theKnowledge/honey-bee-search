@@ -107,7 +107,6 @@ app.post('/api/singlesearchresult', (req, res) => {
         });
 })
 
-
 app.post('/api/searchresults', (req, res) => {
     
     // TODO: uppercase with .toUpperCase()
@@ -123,16 +122,21 @@ app.post('/api/searchresults', (req, res) => {
         });
         return promise;
     };
-    
-    const pattern = RegExp('^[A-Z\,]*$');
-    // Check if string formatted correctly
-    if (!pattern.test(req.body.seqs)) {
-        res.json('Incorrectly formatted input - please try again')
-    }
-        
-    // Split on delimiter and build search results array
-    const sequenceList = req.body.seqs.split(",");
 
+    // Check if string formatted correctly; must have comma delimiter
+    const pattern = RegExp('^[A-Z\,]*$');
+    if (!pattern.test(req.body.seqs)) {
+        res.json('Incorrectly formatted input: Please make sure you are using the correct delimiter and have no whitespace e.g. XYZ,ABC,123 instead of XYZ, ABC!123')
+    }
+    
+    // Split on delimiter and build search results array
+    var sequenceList = req.body.seqs.split(",");
+
+    // Filter any trailing delimiters creating '' in array
+    sequenceList = sequenceList.filter(function (el) {
+      return el != '';
+    });
+    
     // Compile search results
     let promises = sequenceList.map(sequence => seqMatch(sequence));
     Promise.all(promises)

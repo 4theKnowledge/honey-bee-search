@@ -7,17 +7,15 @@ import Pagination from './Pagination';
 import LoadingIndicator from './LoadingIndicator';
 import { CSVLink } from 'react-csv';
 import ResultModal from './ResultModal';
-import BarChart from '../charts/BarChart';
 
 
 class Search extends Component {
   state = {
-    search: 'QVQHI,QVQHI,QVQHI',
+    search: 'QVQHI,QVQH',
     seq_set: [],
     currentPage: 1,
     resultsPerPage: 10,
     hoveredElement: null,
-    data: [10, 40, 30, 20, 50, 10],
   };
 
   componentDidMount = () => {
@@ -50,6 +48,12 @@ class Search extends Component {
     const payload = {
         seqs: this.state.search  // e.g. search bar text
     };
+
+    // Check if the search bar is sending no sequence (e.g. querying entire db...)
+    if (this.state.search === '') {
+      console.log('Search error: No partial sequence specified.')
+      return
+    }
 
     trackPromise(
       Axios({
@@ -154,8 +158,6 @@ class Search extends Component {
   }
 
 
-
-
   render() {
 
     // Get current results
@@ -191,11 +193,10 @@ class Search extends Component {
       downloadLink = <p></p>
     }
 
-    // JSX
     return (
       <React.Fragment>
         <div className="Search">
-              <BarChart width={400} height={200} data={this.state.data} />
+          {/* bar chart goes here... */}
             <div className="wrapper">
               <input
                 type="text"
